@@ -1,0 +1,15 @@
+{
+  "name": "Clean-DLSite",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "DLSite上の表示制限の設定されている作品(AI生成等)を画面上のリストから削除します。",
+  "icons" : {
+    "128" : "icon.png"
+  },
+  "permissions" : [
+  ],
+  "content_scripts": [{
+    "matches": ["https://www.dlsite.com/*"],
+    "js": ["content.js"]
+    }]
+  }
