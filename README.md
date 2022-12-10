@@ -13,7 +13,9 @@ DLSiteでAI生成作品等の表示NG設定をしているが、サムネのみ�
 <img src="https://i.imgur.com/ImXLf9o.png" width="785px">
 
 # 使用方法(Chrome Web Store経由)
-現在、登録作業中です。
+(https://chrome.google.com/webstore/detail/clean-dlsite/kbmmbphljdaccckcnibdojbpbejgfbin) より、
+[Chromeに追加]ボタン押下で簡単にお使いの端末へ導入が完了します。
+そのまま、DLSiteで動作しているかどうかを確認してください。
 
 # 使用方法(デベロッパーモード)
 **(https://www.dlsite.com/maniax/mypage/setting/nondisp) にて作品の表示NG設定を行ってください!**
