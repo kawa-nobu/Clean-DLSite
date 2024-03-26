@@ -17,7 +17,7 @@ DLSiteでAI生成作品等の表示NG設定をしているが、サムネのみ�
 ### 言い換え規制対応
 <img width="185" alt="image" src="https://github.com/kawa-nobu/Clean-DLSite/assets/44832116/8fb2b031-5ab7-499e-a6b0-edf25f7c23db">
 
-画面左上に表示されている「復号化(将来用)」をON/OFFすることで対応できます
+画面右上に表示されている「復号化(将来用)」をON/OFFすることで対応できます
 
 
 ## 使用方法(デベロッパーモード)
