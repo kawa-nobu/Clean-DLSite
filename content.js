@@ -4,7 +4,7 @@ let words_replace_change = false;
 window.addEventListener("load", function(){
     let ls_replace_settings = localStorage.getItem("cds_replace_words");
     const head_login_infomation = document.querySelector(".login_information");
-    head_login_infomation.insertAdjacentHTML("afterbegin", `<div class="login_information_item">復号化(将来用)<span><input id="cds_replace_words_sw" type="checkbox"></span></div>`)
+    head_login_infomation.insertAdjacentHTML("afterbegin", `<div class="login_information_item">復号化<span><input id="cds_replace_words_sw" type="checkbox"></span></div>`);
     if(ls_replace_settings == null){
         localStorage.setItem("cds_replace_words", "false");
         location.reload()
@@ -60,9 +60,10 @@ observer.observe(target_elem,{
     subtree: true
 });
 function replace_words(input_element, mode){
-    //ストア申請時はbase64等で隠ぺいしておく方がよさそう???
-    const decrypt_words = ["メスガキ", "レイプ", "ロリ", "ロリババア", "監禁", "鬼畜", "逆レイプ", "強制/無理矢理", "近親相姦", "拷問", "催眠", "獣姦", "洗脳", "痴漢", "調教", "奴隷", "陵辱", "輪姦", "蟲姦", "モブ姦", "異種姦", "機械姦", "睡眠姦", "催眠音声"];
-    const encrypt_words = ["ざぁ～こ♡", "合意なし", "ひよこ", "ひよこババア", "閉じ込め", "超ひどい", "逆レ", "命令/無理矢理", "近親もの", "責め苦", "トランス/暗示", "動物なかよし", "精神支配", "秘密さわさわ", "しつけ", "下僕", "屈辱", "回し", "虫えっち", "モブおじさん", "異種えっち", "機械責め", "すやすやえっち", "トランス/暗示ボイス"];
+    const base64_words = "JTdCJTIyZGVjcnlwdCUyMiUzQSU1QiUyMiVFMyU4MyVBMSVFMyU4MiVCOSVFMyU4MiVBQyVFMyU4MiVBRCUyMiUyQyUyMiVFMyU4MyVBQyVFMyU4MiVBNCVFMyU4MyU5NyUyMiUyQyUyMiVFMyU4MyVBRCVFMyU4MyVBQSUyMiUyQyUyMiVFMyU4MyVBRCVFMyU4MyVBQSVFMyU4MyU5MCVFMyU4MyU5MCVFMyU4MiVBMiUyMiUyQyUyMiVFNyU5QiVBMyVFNyVBNiU4MSUyMiUyQyUyMiVFOSVBQyVCQyVFNyU5NSU5QyUyMiUyQyUyMiVFOSU4MCU4NiVFMyU4MyVBQyVFMyU4MiVBNCVFMyU4MyU5NyUyMiUyQyUyMiVFNSVCQyVCNyVFNSU4OCVCNiUyRiVFNyU4NCVBMSVFNyU5MCU4NiVFNyU5RiVBMiVFNyU5MCU4NiUyMiUyQyUyMiVFOCVCRiU5MSVFOCVBNiVBQSVFNyU5QiVCOCVFNSVBNyVBNiUyMiUyQyUyMiVFNiU4QiVCNyVFNSU5NSU4RiUyMiUyQyUyMiVFNSU4MiVBQyVFNyU5QyVBMCUyMiUyQyUyMiVFNyU4RCVBMyVFNSVBNyVBNiUyMiUyQyUyMiVFNiVCNCU5NyVFOCU4NCVCMyUyMiUyQyUyMiVFNyU5NyVCNCVFNiVCQyVBMiUyMiUyQyUyMiVFOCVBQSVCRiVFNiU5NSU5OSUyMiUyQyUyMiVFNSVBNSVCNCVFOSU5QSVCNyUyMiUyQyUyMiVFOSU5OSVCNSVFOCVCRSVCMSUyMiUyQyUyMiVFOCVCQyVBQSVFNSVBNyVBNiUyMiUyQyUyMiVFOCU5RiVCMiVFNSVBNyVBNiUyMiUyQyUyMiVFMyU4MyVBMiVFMyU4MyU5NiVFNSVBNyVBNiUyMiUyQyUyMiVFNyU5NSVCMCVFNyVBOCVBRSVFNSVBNyVBNiUyMiUyQyUyMiVFNiVBOSU5RiVFNiVBMiVCMCVFNSVBNyVBNiUyMiUyQyUyMiVFNyU5RCVBMSVFNyU5QyVBMCVFNSVBNyVBNiUyMiUyQyUyMiVFNSU4MiVBQyVFNyU5QyVBMCVFOSU5RiVCMyVFNSVBMyVCMCUyMiU1RCUyQyUyMmVuY3J5cHQlMjIlM0ElNUIlMjIlRTMlODElOTYlRTMlODElODElRUYlQkQlOUUlRTMlODElOTMlRTIlOTklQTElMjIlMkMlMjIlRTUlOTAlODglRTYlODQlOEYlRTMlODElQUElRTMlODElOTclMjIlMkMlMjIlRTMlODElQTQlRTMlODIlOEIlRTMlODElQkElRTMlODElOUYlMjIlMkMlMjIlRTMlODElQTQlRTMlODIlOEIlRTMlODElQkElRTMlODElOUYlRTMlODMlOTAlRTMlODMlOTAlRTMlODIlQTIlMjIlMkMlMjIlRTklOTYlODklRTMlODElOTglRTglQkUlQkMlRTMlODIlODElMjIlMkMlMjIlRTglQjYlODUlRTMlODElQjIlRTMlODElQTklRTMlODElODQlMjIlMkMlMjIlRTklODAlODYlRTMlODMlQUMlMjIlMkMlMjIlRTUlOTElQkQlRTQlQkIlQTQlMkYlRTclODQlQTElRTclOTAlODYlRTclOUYlQTIlRTclOTAlODYlMjIlMkMlMjIlRTglQkYlOTElRTglQTYlQUElRTMlODIlODIlRTMlODElQUUlMjIlMkMlMjIlRTglQjIlQUMlRTMlODIlODElRTglOEIlQTYlMjIlMkMlMjIlRTMlODMlODglRTMlODMlQTklRTMlODMlQjMlRTMlODIlQjklMkYlRTYlOUElOTclRTclQTQlQkElMjIlMkMlMjIlRTclOTUlOUMlRTMlODElODglRTMlODElQTElMjIlMkMlMjIlRTclQjIlQkUlRTclQTUlOUUlRTYlOTQlQUYlRTklODUlOEQlMjIlMkMlMjIlRTclQTclOTglRTUlQUYlODYlRTMlODElOTUlRTMlODIlOEYlRTMlODElOTUlRTMlODIlOEYlMjIlMkMlMjIlRTMlODElOTclRTMlODElQTQlRTMlODElOTElMjIlMkMlMjIlRTQlQjglOEIlRTUlODMlOTUlMjIlMkMlMjIlRTUlQjElODglRTglQkUlQjElMjIlMkMlMjIlRTUlOUIlOUUlRTMlODElOTclMjIlMkMlMjIlRTglOTklQUIlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTMlODMlQTIlRTMlODMlOTYlRTMlODElOEElRTMlODElOTglRTMlODElOTUlRTMlODIlOTMlMjIlMkMlMjIlRTclOTUlQjAlRTclQTglQUUlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTYlQTklOUYlRTYlQTIlQjAlRTglQjIlQUMlRTMlODIlODElMjIlMkMlMjIlRTMlODElOTklRTMlODIlODQlRTMlODElOTklRTMlODIlODQlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTMlODMlODglRTMlODMlQTklRTMlODMlQjMlRTMlODIlQjklMkYlRTYlOUElOTclRTclQTQlQkElRTMlODMlOUMlRTMlODIlQTQlRTMlODIlQjklMjIlNUQlN0Q=";
+    const words_obj = JSON.parse(decodeURIComponent(atob(base64_words)));
+    const decrypt_words = words_obj.decrypt;
+    const encrypt_words = words_obj.encrypt;
     let input_data = input_element.innerHTML;
     if(mode == "decrypt"){
         for (let index = 0; index < encrypt_words.length; index++) {
