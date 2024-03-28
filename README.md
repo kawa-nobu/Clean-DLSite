@@ -1,7 +1,6 @@
 # Clean-DLSite
 <img src="https://i.imgur.com/4fKZRq1.png" width="200px">
 
-**このブランチは言い換え規制対応版のブランチです**
 ## 説明
 DLSiteでAI生成作品等の表示NG設定をしているが、サムネのみの非表示しかされず、イライラした経験があるかと思われます。
 
@@ -15,10 +14,10 @@ DLSiteでAI生成作品等の表示NG設定をしているが、サムネのみ�
 <img src="https://i.imgur.com/ImXLf9o.png" width="785px">
 
 ### 言い換え規制対応
-<img width="185" alt="image" src="https://github.com/kawa-nobu/Clean-DLSite/assets/44832116/8fb2b031-5ab7-499e-a6b0-edf25f7c23db">
+<img width="136" alt="image" src="https://github.com/kawa-nobu/Clean-DLSite/assets/44832116/cf5b0876-11c2-4856-a8e5-7430667a3c5a">
 
-画面右上に表示されている「復号化(将来用)」をON/OFFすることで対応できます
 
+画面右上に表示されている「復号化」をON/OFFすることで対応できます
 
 ## 使用方法(デベロッパーモード)
 **(https://www.dlsite.com/maniax/mypage/setting/nondisp) にて作品の表示NG設定を行ってください!**
