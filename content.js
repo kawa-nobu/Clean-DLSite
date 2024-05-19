@@ -1,5 +1,5 @@
 console.log("Clean-DLSite is Working!");
-let target_elem = document.getElementById("wrapper");
+let target_elem = document.querySelector('#wrapper');
 let words_replace_change = false;
 window.addEventListener("load", function(){
     let ls_replace_settings = localStorage.getItem("cds_replace_words");
@@ -25,14 +25,15 @@ window.addEventListener("load", function(){
         });
     }
 });
+
 const observer = new MutationObserver(run);
 function run(){
+    //console.log("work")
     const ls_replace_settings = localStorage.getItem("cds_replace_words");
-    let rem_elem = document.getElementsByClassName('_filter');
+    let rem_elem = document.querySelectorAll('._filter');
     for(let i=0;rem_elem.length>i;i++){
-        rem_elem[i].parentElement.parentElement.remove();
+        rem_elem[i].closest('li').remove();
     }
-console.log("work")
     if(ls_replace_settings == "true"){
         observer.disconnect();
         target_elem.innerHTML = replace_words(target_elem, "decrypt");
@@ -57,7 +58,8 @@ console.log("work")
 observer.observe(target_elem,{
     childList: true,
     characterData: true,
-    subtree: true
+    subtree: true,
+    attributes: true
 });
 function replace_words(input_element, mode){
     const base64_words = "JTdCJTIyZGVjcnlwdCUyMiUzQSU1QiUyMiVFMyU4MyVBMSVFMyU4MiVCOSVFMyU4MiVBQyVFMyU4MiVBRCUyMiUyQyUyMiVFMyU4MyVBQyVFMyU4MiVBNCVFMyU4MyU5NyUyMiUyQyUyMiVFMyU4MyVBRCVFMyU4MyVBQSUyMiUyQyUyMiVFMyU4MyVBRCVFMyU4MyVBQSVFMyU4MyU5MCVFMyU4MyU5MCVFMyU4MiVBMiUyMiUyQyUyMiVFNyU5QiVBMyVFNyVBNiU4MSUyMiUyQyUyMiVFOSVBQyVCQyVFNyU5NSU5QyUyMiUyQyUyMiVFOSU4MCU4NiVFMyU4MyVBQyVFMyU4MiVBNCVFMyU4MyU5NyUyMiUyQyUyMiVFNSVCQyVCNyVFNSU4OCVCNiUyRiVFNyU4NCVBMSVFNyU5MCU4NiVFNyU5RiVBMiVFNyU5MCU4NiUyMiUyQyUyMiVFOCVCRiU5MSVFOCVBNiVBQSVFNyU5QiVCOCVFNSVBNyVBNiUyMiUyQyUyMiVFNiU4QiVCNyVFNSU5NSU4RiUyMiUyQyUyMiVFNSU4MiVBQyVFNyU5QyVBMCUyMiUyQyUyMiVFNyU4RCVBMyVFNSVBNyVBNiUyMiUyQyUyMiVFNiVCNCU5NyVFOCU4NCVCMyUyMiUyQyUyMiVFNyU5NyVCNCVFNiVCQyVBMiUyMiUyQyUyMiVFOCVBQSVCRiVFNiU5NSU5OSUyMiUyQyUyMiVFNSVBNSVCNCVFOSU5QSVCNyUyMiUyQyUyMiVFOSU5OSVCNSVFOCVCRSVCMSUyMiUyQyUyMiVFOCVCQyVBQSVFNSVBNyVBNiUyMiUyQyUyMiVFOCU5RiVCMiVFNSVBNyVBNiUyMiUyQyUyMiVFMyU4MyVBMiVFMyU4MyU5NiVFNSVBNyVBNiUyMiUyQyUyMiVFNyU5NSVCMCVFNyVBOCVBRSVFNSVBNyVBNiUyMiUyQyUyMiVFNiVBOSU5RiVFNiVBMiVCMCVFNSVBNyVBNiUyMiUyQyUyMiVFNyU5RCVBMSVFNyU5QyVBMCVFNSVBNyVBNiUyMiUyQyUyMiVFNSU4MiVBQyVFNyU5QyVBMCVFOSU5RiVCMyVFNSVBMyVCMCUyMiU1RCUyQyUyMmVuY3J5cHQlMjIlM0ElNUIlMjIlRTMlODElOTYlRTMlODElODElRUYlQkQlOUUlRTMlODElOTMlRTIlOTklQTElMjIlMkMlMjIlRTUlOTAlODglRTYlODQlOEYlRTMlODElQUElRTMlODElOTclMjIlMkMlMjIlRTMlODElQTQlRTMlODIlOEIlRTMlODElQkElRTMlODElOUYlMjIlMkMlMjIlRTMlODElQTQlRTMlODIlOEIlRTMlODElQkElRTMlODElOUYlRTMlODMlOTAlRTMlODMlOTAlRTMlODIlQTIlMjIlMkMlMjIlRTklOTYlODklRTMlODElOTglRTglQkUlQkMlRTMlODIlODElMjIlMkMlMjIlRTglQjYlODUlRTMlODElQjIlRTMlODElQTklRTMlODElODQlMjIlMkMlMjIlRTklODAlODYlRTMlODMlQUMlMjIlMkMlMjIlRTUlOTElQkQlRTQlQkIlQTQlMkYlRTclODQlQTElRTclOTAlODYlRTclOUYlQTIlRTclOTAlODYlMjIlMkMlMjIlRTglQkYlOTElRTglQTYlQUElRTMlODIlODIlRTMlODElQUUlMjIlMkMlMjIlRTglQjIlQUMlRTMlODIlODElRTglOEIlQTYlMjIlMkMlMjIlRTMlODMlODglRTMlODMlQTklRTMlODMlQjMlRTMlODIlQjklMkYlRTYlOUElOTclRTclQTQlQkElMjIlMkMlMjIlRTclOTUlOUMlRTMlODElODglRTMlODElQTElMjIlMkMlMjIlRTclQjIlQkUlRTclQTUlOUUlRTYlOTQlQUYlRTklODUlOEQlMjIlMkMlMjIlRTclQTclOTglRTUlQUYlODYlRTMlODElOTUlRTMlODIlOEYlRTMlODElOTUlRTMlODIlOEYlMjIlMkMlMjIlRTMlODElOTclRTMlODElQTQlRTMlODElOTElMjIlMkMlMjIlRTQlQjglOEIlRTUlODMlOTUlMjIlMkMlMjIlRTUlQjElODglRTglQkUlQjElMjIlMkMlMjIlRTUlOUIlOUUlRTMlODElOTclMjIlMkMlMjIlRTglOTklQUIlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTMlODMlQTIlRTMlODMlOTYlRTMlODElOEElRTMlODElOTglRTMlODElOTUlRTMlODIlOTMlMjIlMkMlMjIlRTclOTUlQjAlRTclQTglQUUlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTYlQTklOUYlRTYlQTIlQjAlRTglQjIlQUMlRTMlODIlODElMjIlMkMlMjIlRTMlODElOTklRTMlODIlODQlRTMlODElOTklRTMlODIlODQlRTMlODElODglRTMlODElQTMlRTMlODElQTElMjIlMkMlMjIlRTMlODMlODglRTMlODMlQTklRTMlODMlQjMlRTMlODIlQjklMkYlRTYlOUElOTclRTclQTQlQkElRTMlODMlOUMlRTMlODIlQTQlRTMlODIlQjklMjIlNUQlN0Q=";
@@ -74,6 +76,6 @@ function replace_words(input_element, mode){
             input_data = input_data.replaceAll(decrypt_words[index], encrypt_words[index]);
         }
     }
-    target_elem = document.getElementById("wrapper");
+    target_elem = document.querySelector('#wrapper');
     return input_data;
 }

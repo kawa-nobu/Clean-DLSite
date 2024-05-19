@@ -1,6 +1,6 @@
 {
   "name": "Clean-DLSite",
-  "version": "1.2",
+  "version": "1.2.1",
   "manifest_version": 3,
   "description": "DLSite上の表示制限の設定されている作品(AI生成等)を画面上のリストから削除します。言い換え文字も一部復号化できます",
   "icons" : {
