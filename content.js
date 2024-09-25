@@ -1,13 +1,18 @@
 console.log("Clean-DLSite is Working!");
-let target_elem = document.querySelector('#wrapper');
+let target_elem = document.body;
 let words_replace_change = false;
 window.addEventListener("load", function(){
+    document.head.insertAdjacentHTML("afterbegin", `<style type="text/css">#main_inner div.n_worklist_item:has(._censored), tr:has(._censored), li:has(._censored){display:none}</style>`);
     let ls_replace_settings = localStorage.getItem("cds_replace_words");
-    const head_login_infomation = document.querySelector(".login_information");
-    head_login_infomation.insertAdjacentHTML("afterbegin", `<div class="login_information_item">復号化<span><input id="cds_replace_words_sw" type="checkbox"></span></div>`);
+    let old_hide_mode_settings = localStorage.getItem("cds_old_hide_mode");
+    const header_dropdown_nav = document.querySelector("div .header_dropdown_nav");
+    header_dropdown_nav.insertAdjacentHTML("afterbegin", `<div class="login_information_item">復号化<span><input id="cds_replace_words_sw" type="checkbox"></span></div>`);
+    if(old_hide_mode_settings == null){
+        localStorage.setItem("cds_old_hide_mode", "false");
+    }
     if(ls_replace_settings == null){
         localStorage.setItem("cds_replace_words", "false");
-        location.reload()
+        location.reload();
     }else{
         if(ls_replace_settings == "true"){
             document.querySelector("#cds_replace_words_sw").checked = true;
@@ -30,18 +35,25 @@ const observer = new MutationObserver(run);
 function run(){
     //console.log("work")
     const ls_replace_settings = localStorage.getItem("cds_replace_words");
-    let rem_elem = document.querySelectorAll('._filter');
-    for(let i=0;rem_elem.length>i;i++){
-        rem_elem[i].closest('li').remove();
+    const old_hide_mode_settings = localStorage.getItem("cds_old_hide_mode");
+    if(old_hide_mode_settings == "true"){
+        let rem_elem = document.querySelectorAll('._filter');
+        let target_tag = 'li';
+        if(location.href.includes("show_type/1/")){
+            target_tag = 'tr';
+        }
+        for(let i=0;rem_elem.length>i;i++){
+            rem_elem[i].closest(target_tag).remove();
+        }
     }
     if(ls_replace_settings == "true"){
         observer.disconnect();
         target_elem.innerHTML = replace_words(target_elem, "decrypt");
         observer.observe(target_elem,{
-        childList: true,
-        characterData: true,
-        subtree: true
-    });
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
     }else{
         if(words_replace_change){
             observer.disconnect();
